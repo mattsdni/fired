@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+{% from "form_macros.html" import render_field %}
+
+{% block title %}
+  Houseme -- Signup
+{% endblock %}
+
+{% block styles %}
+  {{ super() }}
+  <style>
+    form#signup-form {
+      width: 500px;
+      max-width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    #type li {
+      display: inline-block;
+      padding-right: 30px;
+    }
+
+  </style>
+{% endblock %}
+
+{% block content %}
+  <section>
+    <div class="text-xs-center">
+      <h2>Create a New Account</h2>
+    </div>
+    <form action="" method="post" id="signup-form">
+      {{ signup_form.hidden_tag() }}
+
+      {#      {% for field in signup_form %}#}
+      {#        {% if field.id != 'csrf_token' %}#}
+      {#          <div id="{{ field.id }}-div">#}
+      {#          {{ field.label }}#}
+      {#          {{ field }}#}
+      {#          {{ field.id }}#}
+      {#          </div>#}
+      {#          <br>#}
+      {#        {% endif %}#}
+      {##}
+      {#      {% endfor %}#}
+
+
+      {{ render_field(signup_form.type, class='form-control', required=true, hidden=True) }}
+      <div class="row">
+        <div class="col-xs-12 col-md-6">
+          <div id="fname-div">
+            {{ render_field(signup_form.fname, class='form-control', required=true, maxlength=50) }}
+          </div>
+        </div>
+        <div class="col-xs-12 col-md-6">
+          {{ render_field(signup_form.lname, class='form-control') }}
+        </div>
+      </div>
+      {{ render_field(signup_form.email, class='form-control', placeholder='Email', required=true, type="email", maxlength=150) }}
+      {{ render_field(signup_form.password, class='form-control', required=true, maxlength=50) }}
+      {{ render_field(signup_form.password2, class='form-control', required=true, maxlength=50) }}
+      <br>
+      <button type="submit" class="btn btn-primary" id="btn-submit">Register</button>
+{#      <button type="button" class="btn btn-primary" id="btn-submit" onclick="submit_form()">Register</button>#}
+
+
+    </form>
+  </section>
+
+{% endblock %}
+
+{% block scripts %}
+  {{ super() }}
+    <script>
+  $("#signup-form").submit(function() {
+    $(this).submit(function() {
+        return false;
+    });
+    return true;
+});
+  </script>
+  <script>
+    var type = $("#type-div");
+
+    var fname = $("#fname-div");
+    var lname = $("#lname-div");
+
+    var email = $("#email-div");
+    var password = $("#password-div");
+    var password2 = $("#password2-div");
+
+    function get_form_data() {
+      return $('#signup-form').serializeArray().reduce(function (obj, item) {
+        obj[item.name] = item.value;
+        return obj;
+      }, {});
+    }
+
+    function submit_form() {
+{#      $.ajax({#}
+{#        type: "POST",#}
+{#        url: "/api/v1/users/signup",#}
+{#        data: "name=John&location=Boston",#}
+{#        success: function (msg) {#}
+{#          alert("Data Saved: " + msg);#}
+{#        },#}
+{#        error: function (XMLHttpRequest, textStatus, errorThrown) {#}
+{#          alert("some error");#}
+{#        }#}
+{#      });#}
+      $("#signup-form").submit();
+    }
+
+
+  </script>
+{% endblock %}

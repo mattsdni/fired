@@ -1,0 +1,5 @@
+# Created by .ignore support plugin (hsz.mobi)
+.idea
+fired/.DS_Store
+*.pyc
+settings.py

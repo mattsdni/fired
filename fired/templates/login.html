@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% from "form_macros.html" import render_field %}
+
+{% block styles %}
+    {{ super() }}
+    <style>
+        .form-signin {
+            max-width: 350px;
+            padding: 15px;
+            margin: 0 auto;
+        }
+
+        .form-signin .form-signin-heading,
+        .form-signin .checkbox {
+            margin-bottom: 10px;
+        }
+
+        .form-signin .checkbox {
+            font-weight: normal;
+        }
+
+        .form-signin .form-control {
+            position: relative;
+            height: auto;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        .form-signin .form-control:focus {
+            z-index: 2;
+        }
+
+        .form-signin input[type="email"] {
+            margin-bottom: -1px;
+            border-bottom-right-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+
+        .form-signin input[type="password"] {
+            margin-bottom: 10px;
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+        }
+    </style>
+
+{% endblock %}
+
+{% block title %}
+    Houseme -- Login
+{% endblock %}
+
+{% block content %}
+
+    <form class="form-signin" action="" method="post">
+        {{ login_form.hidden_tag() }}
+        <h3 class="form-signin-heading">Please sign in to continue</h3>
+        {{ login_form.username.label(class="sr-only") }}
+        {{ login_form.username(class="form-control", placeholder=login_form.username.label.text) }}
+        {{ login_form.password.label(class="sr-only") }}
+        {{ login_form.password(class="form-control", placeholder=login_form.password.label.text) }}
+        {{ login_form.remember_me.label }}
+        {{ login_form.remember_me }}
+        {{ login_form.submit(class="btn btn-lg btn-primary btn-block") }}
+    </form>
+
+{% endblock %}
