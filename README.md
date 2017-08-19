@@ -6,9 +6,9 @@
 * nope
 
 #### Backend
-* Flask - http://flask.pocoo.org/docs/0.11/
-* Jinja2  - http://jinja.pocoo.org/docs/dev/
-* SQLAlchemy - http://www.sqlalchemy.org/
+* Express - http://expressjs.com/en/api.html
+* Node.js - https://nodejs.org/dist/latest-v8.x/docs/api/
+* MongoDB - https://docs.mongodb.com/manual/
 
 ## Getting Started
     
