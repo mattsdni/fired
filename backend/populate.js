@@ -22,3 +22,5 @@ users.map(data => {
   // and save it into the database
   user.save();
 });
+
+process.exit()
