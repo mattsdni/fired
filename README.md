@@ -3,7 +3,7 @@
 	-Ghandi (probably)
 
 #### Frontend
-* nope
+* React Native - https://facebook.github.io/react-native/docs/getting-started.html
 
 #### Backend
 * Express - http://expressjs.com/en/api.html
@@ -11,10 +11,19 @@
 * MongoDB - https://docs.mongodb.com/manual/
 
 ## Getting Started
-    
-Set up your dev environment by running these commands in a terminal:
+Install Node.js v8.4.0 and npm v4.6.1
 
-    brew install nodejs
+#### Frontend
+To start frontend dev run this command
+    
+    cd frontend/ && npm install
+   
+    npm start
+
+Then download Expo for your phone and scan the QR code to get started.
+
+#### Backend    
+Set up your dev environment by running these commands in a terminal:
 
     cd backend/ && npm install
 
@@ -37,3 +46,4 @@ Start the webserver
     npm start
 
 Open your browser to `http://localhost:3000/v1/users.json` to see the user data.
+
