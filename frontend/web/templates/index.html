@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>Fired</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap4.css') }}">
+	<script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
+</head>
+<body>
+	<h1 style="margin-left:10px">Fired</h1>
+	<form style="padding-left: 10px;; margin-bottom:5px;">
+		<label for="name">Name</label>
+		<input type="text" id="name">
+		<button type="button" class="btn btn-info" onclick="add()">Add</button>
+	</form>
+	<table class="table table-striped">
+		<thead class=thead-inverse>
+			<tr>
+				<th>Name</th>
+				<th>Fired</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody id="user-table">
+		</tbody>
+	</table>
+	<script type="text/javascript">
+		$.get("http://localhost:3000/users", function (data, status) {
+			var userTable = $("#user-table");
+        	for (var i = 0; i < data.users.length; i++) {
+        		userTable.append("<tr><td>" + title(data.users[i].username) + "</td>"
+        			+ "<td id='" + data.users[i].username + "'>" + data.users[i].firedCount + "</td>"
+        			+ "<td><button type='button' class='btn btn-success'"
+        			+ "onclick='fire(" + "\"" + data.users[i].username + "\"" + ")'>Fire</button></td></td>");
+        	}
+        });
+
+		function fire(name) {
+			$.post("http://localhost:3000/fire", {"username":name},
+				function (data, status) {
+					$("#"+name).text(parseInt($("#"+name).text())+1);
+				}
+			);
+		}
+
+		function add() {
+			$.post("http://localhost:3000/user", {"username":$("#name").val()},
+				function (data, status) {
+					console.log(data);
+					$("#user-table").append("<tr><td>" + title(data.username) + "</td>"
+        			+ "<td id='" + data.username + "'>" + data.firedCount + "</td>"
+        			+ "<td><button type='button' class='btn btn-success'"
+        			+ "onclick='fire(" + "\"" + data.username + "\"" + ")'>Fire</button></td></td>");
+				}
+			);
+		}
+
+		function title(str) {
+			return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+		}
+	</script>
+</body>
